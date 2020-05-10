@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/BasicWorkout.unity
+  isLoaded: 1
+  isActive: 1
