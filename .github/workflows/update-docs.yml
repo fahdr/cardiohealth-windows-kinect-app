@@ -1,0 +1,30 @@
+name: Update docs submodule
+
+on:
+  repository_dispatch:
+    types: [vault-updated]
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update docs submodule
+        run: |
+          git submodule update --remote docs/vault
+          if git diff --quiet docs/vault; then
+            echo "Submodule already up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/vault
+          git commit -m "chore: update docs submodule"
+          git push
