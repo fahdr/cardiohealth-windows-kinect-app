@@ -1,3 +1,0 @@
-[submodule "docs/vault"]
-	path = docs/vault
-	url = git@github.com:fahdr/obsidian-vault.git
